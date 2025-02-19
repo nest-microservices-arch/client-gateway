@@ -22,6 +22,9 @@ async function bootstrap() {
 
   await app.listen(envs.PORT);
 
+  console.log('test actualize submodules');
+  
+
   logger.log(`gateway is running on port ${envs.PORT}`);
 }
 bootstrap();
