@@ -19,6 +19,15 @@ export class RpcCustomExceptionFilter implements ExceptionFilter {
       return response.status(status).json(rcpError);
     }
 
+    if (typeof rcpError === 'object' && 'message' in rcpError) {
+      const message: string = rcpError.message as string;
+      return response.status(500).json({
+        statusCode: 500,
+        message: message
+          .toString()
+          .substring(0, message.toString().indexOf('(') - 1),
+      });
+    }
     response.status(400).json({
       statusCode: 400,
       message: 'Bad Request',
